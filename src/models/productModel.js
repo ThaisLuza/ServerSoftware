@@ -1,14 +1,14 @@
 const connection = require("./connection");
 
 const getAllProducts = async () => {
-  const query = "SELECT * FROM ServerSoftwares.products ORDER BY id";
+  const query = "SELECT * FROM ServerSoftwares.produtos ORDER BY id";
   const [products] = await connection.execute(query);
 
   return products;
 };
 
 const getProductsById = async (id) => {
-  const query = "SELECT * FROM ServerSoftwares.products WHERE id=?";
+  const query = "SELECT * FROM ServerSoftwares.produtos WHERE id=?";
   const [product] = await connection.execute(query, [id]);
 
   if (product.length === 0) return null;
@@ -17,7 +17,7 @@ const getProductsById = async (id) => {
 };
 
 const getProductByCodigo = async (codigo) => {
-  const query = 'SELECT * FROM StoreManager.products WHERE codigo=?';
+  const query = 'SELECT * FROM ServerSoftwares.produtos WHERE codigo=?';
 
   const [product] = await connection.execute(query, [codigo]);
 
@@ -26,7 +26,7 @@ const getProductByCodigo = async (codigo) => {
 
 const createProduct = async (codigo, descricao, preco, data_cadastro) => {
   const query =
-    "INSERT INTO ServerSoftwares.products (codigo, descricao, preco, data_cadastro) VALUES (?,?,?,?)";
+    "INSERT INTO ServerSoftwares.produtos (codigo, descricao, preco, data_cadastro) VALUES (?,?,?,?)";
   const [newId] = await connection.execute(query, [
     codigo,
     descricao,
@@ -47,7 +47,7 @@ const createProduct = async (codigo, descricao, preco, data_cadastro) => {
 
 const updateProduct = async (id, { codigo, descricao, preco, data_cadastro }) => {
   const query =
-    "UPDATE ServerSoftwares.products SET codigo = ?, descricao = ?, preco = ?, data_cadastro = ? WHERE id = ?";
+    "UPDATE ServerSoftwares.produtos SET codigo = ?, descricao = ?, preco = ?, data_cadastro = ? WHERE id = ?";
   const newData = await connection.execute(query, [codigo, descricao, preco, data_cadastro, id]);
 
   if (newData.length === 0) return null;
@@ -60,7 +60,7 @@ const updateProduct = async (id, { codigo, descricao, preco, data_cadastro }) =>
 
 const deleteProduct = async (id) => {
   await connection.execute(
-    "DELETE FROM ServerSoftwares.products WHERE id = ?",
+    "DELETE FROM ServerSoftwares.produtos WHERE id = ?",
     [id]
   );
   // const delete = await connection.execute(query,[id])
