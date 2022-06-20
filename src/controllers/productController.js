@@ -1,4 +1,4 @@
-const productService = require('../services/productService');
+const productService = require("../services/productService");
 
 const getAllProducts = async (req, res, _next) => {
   try {
@@ -11,7 +11,7 @@ const getAllProducts = async (req, res, _next) => {
 };
 
 const getProductsById = async (req, res, _next) => {
-   try {
+  try {
     const { id } = req.params;
     const product = await productService.getProductsById(id);
 
@@ -19,7 +19,7 @@ const getProductsById = async (req, res, _next) => {
 
     return res.status(200).json(product);
   } catch (error) {
-    return res.status(404).json({ message: 'Product not found' });
+    return res.status(404).json({ message: "Product not found" });
   }
 };
 
@@ -27,7 +27,12 @@ const createProduct = async (req, res, next) => {
   try {
     const { codigo, descricao, preco, data_cadastro } = req.body;
 
-    const newProduct = await productService.createProduct(codigo, descricao, preco, data_cadastro);
+    const newProduct = await productService.createProduct(
+      codigo,
+      descricao,
+      preco,
+      data_cadastro
+    );
 
     return res.status(201).json(newProduct);
   } catch (err) {

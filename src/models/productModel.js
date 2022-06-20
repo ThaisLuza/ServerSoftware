@@ -17,7 +17,7 @@ const getProductsById = async (id) => {
 };
 
 const getProductByCodigo = async (codigo) => {
-  const query = 'SELECT * FROM ServerSoftwares.produtos WHERE codigo=?';
+  const query = "SELECT * FROM ServerSoftwares.produtos WHERE codigo=?";
 
   const [product] = await connection.execute(query, [codigo]);
 
@@ -45,16 +45,28 @@ const createProduct = async (codigo, descricao, preco, data_cadastro) => {
   return newProduct;
 };
 
-const updateProduct = async (id, { codigo, descricao, preco, data_cadastro }) => {
+const updateProduct = async (
+  id,
+  { codigo, descricao, preco, data_cadastro }
+) => {
   const query =
     "UPDATE ServerSoftwares.produtos SET codigo = ?, descricao = ?, preco = ?, data_cadastro = ? WHERE id = ?";
-  const newData = await connection.execute(query, [codigo, descricao, preco, data_cadastro, id]);
+  const newData = await connection.execute(query, [
+    codigo,
+    descricao,
+    preco,
+    data_cadastro,
+    id,
+  ]);
 
   if (newData.length === 0) return null;
 
   return {
     id,
-    codigo, descricao, preco, data_cadastro
+    codigo,
+    descricao,
+    preco,
+    data_cadastro,
   };
 };
 
