@@ -15,7 +15,7 @@ const getProductsById = async (id) => {
   return product;
 };
 
-const createProduct = async (codigo, descricao, preco, data_cadastro) => {
+const createProduct = async (codigo, descricao, preco) => {
   const verifyProduct = await productModel.getProductByCodigo(codigo);
 
   if (verifyProduct) throw erroHandler(409, "Product already exists");
@@ -24,7 +24,6 @@ const createProduct = async (codigo, descricao, preco, data_cadastro) => {
     codigo,
     descricao,
     preco,
-    data_cadastro
   );
 
   return newProduct;

@@ -9,6 +9,6 @@ CREATE TABLE produtos (
   codigo INT NOT NULL,
   descricao VARCHAR(100) NOT NULL,
   preco INT NOT NULL,
-  data_cadastro DATE,
+  data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY(id)
 ) ENGINE=INNODB;

@@ -24,14 +24,13 @@ const getProductByCodigo = async (codigo) => {
   return product[0];
 };
 
-const createProduct = async (codigo, descricao, preco, data_cadastro) => {
+const createProduct = async (codigo, descricao, preco) => {
   const query =
-    "INSERT INTO ServerSoftwares.produtos (codigo, descricao, preco, data_cadastro) VALUES (?,?,?,?)";
+    "INSERT INTO ServerSoftwares.produtos (codigo, descricao, preco) VALUES (?,?,?)";
   const [newId] = await connection.execute(query, [
     codigo,
     descricao,
     preco,
-    data_cadastro,
   ]);
 
   const newProduct = {
@@ -39,7 +38,6 @@ const createProduct = async (codigo, descricao, preco, data_cadastro) => {
     codigo,
     descricao,
     preco,
-    data_cadastro,
   };
 
   return newProduct;
@@ -47,15 +45,14 @@ const createProduct = async (codigo, descricao, preco, data_cadastro) => {
 
 const updateProduct = async (
   id,
-  { codigo, descricao, preco, data_cadastro }
+  { codigo, descricao, preco }
 ) => {
   const query =
-    "UPDATE ServerSoftwares.produtos SET codigo = ?, descricao = ?, preco = ?, data_cadastro = ? WHERE id = ?";
+    "UPDATE ServerSoftwares.produtos SET codigo = ?, descricao = ?, preco = ? WHERE id = ?";
   const newData = await connection.execute(query, [
     codigo,
     descricao,
     preco,
-    data_cadastro,
     id,
   ]);
 
@@ -66,7 +63,6 @@ const updateProduct = async (
     codigo,
     descricao,
     preco,
-    data_cadastro,
   };
 };
 
@@ -75,7 +71,7 @@ const deleteProduct = async (id) => {
     "DELETE FROM ServerSoftwares.produtos WHERE id = ?",
     [id]
   );
-  // const delete = await connection.execute(query,[id])
+  
 };
 
 module.exports = {
